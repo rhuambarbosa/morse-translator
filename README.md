@@ -20,6 +20,15 @@ Finalizada automaticamente após 30 min sem interação.
 ## Uso
 
 Ativar a aplicação através do [health](https://translate-morse.herokuapp.com/actuator/health)
+```json
+request:
+
+curl --location --request GET 'https://translate-morse.herokuapp.com/actuator/health'
+
+response:
+
+{"status": "UP"}
+```
 
 Montar a chamada esperada conforme opções abaixo:
 

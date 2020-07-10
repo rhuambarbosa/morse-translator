@@ -18,11 +18,11 @@ public class MorseConverter {
 
     public static String encode(String text) {
         StringBuilder result = new StringBuilder();
-        for (char character : text.toCharArray()) {
+        for (char character : text.toUpperCase().toCharArray()) {
             result.append(encode.get(character));
         }
 
-        return result.toString();
+        return result.toString().trim();
     }
 
     public static String decode(String text) {
@@ -32,7 +32,7 @@ public class MorseConverter {
             result.append(isEmpty(code) ? SEPARATOR : code);
         }
 
-        return result.toString();
+        return result.toString().trim();
     }
 
     private static Map<Character, String> encode() {
