@@ -42,13 +42,19 @@ uri:  https://translate-morse.herokuapp.com
 
 ### curl:
 
-TEXT -> MORSE | /2morse 
+TEXT -> MORSE
 ```json
+request:
+
 curl --location --request POST 'https://translate-morse.herokuapp.com/translate/2morse' \
 --header 'Content-Type: application/json' \
 --data-raw '{
 	"text":"HOLA MELI"	
 }'
+
+response:
+
+{ code:200, response: '.... --- .-.. .-  -- . .-.. ..'}
 ```
 
 
