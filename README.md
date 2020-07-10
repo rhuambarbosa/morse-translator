@@ -6,23 +6,24 @@ Aplicação para conversão em morse comportando as seguintes conversões:
 TEXT -> MORSE |
 TEXT -> BINARY | 
 MORSE -> TEXT |
-MORSE -> BINARY
+MORSE -> BINARY |
 BINARY -> TEXT |
 BIMARY -> MORSE
 
 ## Deploy
-Deploy na aplicação no [heroku](https://www.heroku.com/)
+Deploy [heroku](https://www.heroku.com)
 
-Pode acessar a aplicação em morse-translate.heroku.com
+Ativada automaticamente quando possui uma chamada a API
 
-Como o deploy esta em uma conta grátis se encerra após 30 min sem uso então deve-se realizar uma chamada de
-[health](morse-translate.heroku.com) para verificar se a aplicação esta em pé, com isso a aplicação vai ser levantada após a chamada, após estiver health pode 
-fazer uso dos endpoint de conversão.
+Finalizada automaticamente após 30 min sem interação.
 
+## Uso
 
-Funcionalidades
+Ativar a aplicação através do [health](https://translate-morse.herokuapp.com/actuator/health)
 
-uri:  http://morse-translate.heroku.com/translate
+Montar a chamada esperada conforme opções abaixo:
+
+uri:  https://translate-morse.herokuapp.com
 
 | Verbo  |  Conversão      | Endpoint                                        | Descrição |
 | -------|-----------------|-------------------------------------------------|-----------|
@@ -33,8 +34,21 @@ uri:  http://morse-translate.heroku.com/translate
 | POST   | BINARY -> TEXT  | /binary2text | Binario para texto |
 | POST   | BINARY -> MORSE | /binary2morse  |  Binario para morse |
 
-Payload: 
+### Payload: 
 
 | TEXT | MORSE | BINARY |
 |------|-----|-----|
-| {"text":"HELLO GUY"} | {"text":"01001000 01000101 01001100 01001100 01001111 00100000 01000111 01010101 01011001"} |{"text":".... . .-.. .-.. ---  --. ..- -.--"} |
+| {"text":"HOLA MELI"} | {"text":"01001000 01001111 01001100 01000001 00100000 01001101 01000101 01001100 01001001"} |{"text":".... --- .-.. .-  -- . .-.. .."} |
+
+### curl:
+
+TEXT -> MORSE | /2morse 
+```json
+curl --location --request POST 'https://translate-morse.herokuapp.com/translate/2morse' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+	"text":"HOLA MELI"	
+}'
+```
+
+
