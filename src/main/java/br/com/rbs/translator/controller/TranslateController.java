@@ -1,9 +1,9 @@
 package br.com.rbs.translator.controller;
 
 import br.com.rbs.translator.service.TranslateService;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Mono;
 
@@ -17,23 +17,33 @@ public class TranslateController {
         this.translateService = translateService;
     }
 
-    @GetMapping("/2text")
-    public Mono<String> translate2Human(@RequestParam String text) {
-        return translateService.decode2Morse(text);
+    @PostMapping("/2text")
+    public Mono<String> translate2Human(@RequestBody TranslateRequest request) {
+        return translateService.decode2Morse(request.getText());
     }
 
-    @GetMapping("/2morse")
-    public Mono<String> decodeBits2Morse(@RequestParam String text) {
-        return translateService.encode2Morse(text);
+    @PostMapping("/2morse")
+    public Mono<String> decodeBits2Morse(@RequestBody TranslateRequest request) {
+        return translateService.encode2Morse(request.getText());
     }
 
-    @GetMapping("/2binary")
-    public Mono<String> encode2Binary(@RequestParam String text, boolean separator) {
-        return translateService.encode2Binary(text, separator);
+    @PostMapping("/2binary")
+    public Mono<String> encode2Binary(@RequestBody TranslateRequest request, boolean separator) {
+        return translateService.encode2Binary(request.getText(), separator);
     }
 
-    @GetMapping("/binary2text")
-    public Mono<String> decode2Binary(@RequestParam String text) {
-        return translateService.decode2Binary(text);
+    @PostMapping("/morse2binary")
+    public Mono<String> morse2binary(@RequestBody TranslateRequest request, boolean separator) {
+        return translateService.morse2binary(request.getText(), separator);
+    }
+
+    @PostMapping("/binary2morse")
+    public Mono<String> binary2morse(@RequestBody TranslateRequest request) {
+        return translateService.binary2morse(request.getText());
+    }
+
+    @PostMapping("/binary2text")
+    public Mono<String> binary2text(@RequestBody TranslateRequest request) {
+        return translateService.decode2Binary(request.getText());
     }
 }

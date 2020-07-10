@@ -22,11 +22,19 @@ fazer uso dos endpoint de conversão.
 
 Funcionalidades
 
-| Verbo |  Conversão      | Endpoint                                        | Descrição |
-| ------|-----------------|-------------------------------------------------|-----------|
-| Get   | TEXT -> MORSE   | http://morse-translate.heroku.com/              | Cria um novo tipo de cerveja.|
-| Get   | TEXT -> BINARY  | http://localhost:8082/beer/beers                | Recebe uma lista de cevejas para criação |
-| Get   | MORSE -> TEXT   | http://localhost:8082/beer/beers/{id}           | Remove a cerveja pelo id |
-| Get   | MORSE -> BINARY | http://localhost:8082/beer/beers                | Retorna todas as cervejas cadastradas |
-| Get   | BINARY -> TEXT  | http://localhost:8082/beer/beers/?page=1&size=3 | Retorna a cerveja paginada e ordenada pelo nome, recebe dois parametro page e size |
-| Get   | BINARY -> MORSE | http://localhost:8082/best-beers/{temperature}  | Retorna a melhor cerveja e uma lista do spotfy associada ao nome da cerveja ocm base na temperatura informada |
+uri:  http://morse-translate.heroku.com/translate
+
+| Verbo  |  Conversão      | Endpoint                                        | Descrição |
+| -------|-----------------|-------------------------------------------------|-----------|
+| POST   | TEXT -> MORSE   | /2morse          | Texto para Morse |
+| POST   | TEXT -> BINARY  | /2binary?separator=true                 | Texto para binario, pode escolher se deve ou não possuir espaçamento |
+| POST   | MORSE -> TEXT   | /2text           |  Morse para texto |
+| POST   | MORSE -> BINARY | /morse2binary?separator=false                  |  Morse para binario, pode escolher se deve ou não possuir espaçamento |
+| POST   | BINARY -> TEXT  | /binary2text | Binario para texto |
+| POST   | BINARY -> MORSE | /binary2morse  |  Binario para morse |
+
+Payload: 
+
+| TEXT | MORSE | BINARY |
+|------|-----|-----|
+| {"text":"HELLO GUY"} | {"text":"01001000 01000101 01001100 01001100 01001111 00100000 01000111 01010101 01011001"} |{"text":".... . .-.. .-.. ---  --. ..- -.--"} |
