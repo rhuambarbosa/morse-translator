@@ -1,6 +1,5 @@
 package br.com.rbs.translator.service
 
-
 import reactor.test.StepVerifier
 import spock.lang.Specification
 
