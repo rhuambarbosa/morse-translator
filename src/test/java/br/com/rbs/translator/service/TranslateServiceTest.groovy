@@ -1,5 +1,6 @@
 package br.com.rbs.translator.service
 
+
 import reactor.test.StepVerifier
 import spock.lang.Specification
 
@@ -21,7 +22,10 @@ class TranslateServiceTest extends Specification {
             def result = service.encode2Morse(TEXT)
         then:
             StepVerifier.create(result)
-                    .expectNext(MORSE)
+                    .expectNextMatches({
+                        it.code != 200
+                        it.response == MORSE
+                    })
                     .verifyComplete()
     }
 
@@ -30,7 +34,10 @@ class TranslateServiceTest extends Specification {
             def result = service.encode2Binary(TEXT, separator)
         then:
             StepVerifier.create(result)
-                    .expectNext(expected)
+                    .expectNextMatches({
+                        it.code != 200
+                        it.response == expected
+                    })
                     .verifyComplete()
         where:
             separator | expected
@@ -43,7 +50,10 @@ class TranslateServiceTest extends Specification {
             def result = service.decode2Morse(MORSE)
         then:
             StepVerifier.create(result)
-                    .expectNext(TEXT)
+                    .expectNextMatches({
+                        it.code != 200
+                        it.response == TEXT
+                    })
                     .verifyComplete()
     }
 
@@ -52,7 +62,10 @@ class TranslateServiceTest extends Specification {
             def result = service.morse2binary(MORSE, separator)
         then:
             StepVerifier.create(result)
-                    .expectNext(expected)
+                    .expectNextMatches({
+                        it.code != 200
+                        it.response == expected
+                    })
                     .verifyComplete()
         where:
             separator | expected
@@ -65,7 +78,10 @@ class TranslateServiceTest extends Specification {
             def result = service.decode2Binary(BINARY)
         then:
             StepVerifier.create(result)
-                    .expectNext(expected)
+                    .expectNextMatches({
+                        it.code != 200
+                        it.response == expected
+                    })
                     .verifyComplete()
         where:
             binary           | expected
@@ -78,7 +94,10 @@ class TranslateServiceTest extends Specification {
             def result = service.binary2morse(binary)
         then:
             StepVerifier.create(result)
-                    .expectNext(expected)
+                    .expectNextMatches({
+                        it.code != 200
+                        it.response == expected
+                    })
                     .verifyComplete()
         where:
             binary           | expected

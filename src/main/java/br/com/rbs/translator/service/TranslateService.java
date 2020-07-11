@@ -2,6 +2,7 @@ package br.com.rbs.translator.service;
 
 import br.com.rbs.translator.converter.BinaryConverter;
 import br.com.rbs.translator.converter.MorseConverter;
+import br.com.rbs.translator.domain.TranslateResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
@@ -13,33 +14,38 @@ import static reactor.core.publisher.Mono.just;
 @Service
 public class TranslateService {
 
-    public Mono<String> encode2Morse(String text) {
+    public Mono<TranslateResponse> encode2Morse(String text) {
         return just(text)
-                .map(MorseConverter::encode);
+                .map(MorseConverter::encode)
+                .map(TranslateResponse::new);
     }
 
-    public Mono<String> decode2Morse(String text) {
+    public Mono<TranslateResponse> decode2Morse(String text) {
         return just(text)
-                .map(MorseConverter::decode);
+                .map(MorseConverter::decode)
+                .map(TranslateResponse::new);
     }
 
-    public Mono<String> encode2Binary(String text, boolean separator) {
+    public Mono<TranslateResponse> encode2Binary(String text, boolean separator) {
         return just(text)
-                .map(input -> encode(input, separator));
+                .map(input -> encode(input, separator))
+                .map(TranslateResponse::new);
     }
 
-    public Mono<String> decode2Binary(String text) {
+    public Mono<TranslateResponse> decode2Binary(String text) {
         return just(text)
-                .map(BinaryConverter::decode);
+                .map(BinaryConverter::decode)
+                .map(TranslateResponse::new);
     }
 
-    public Mono<String> morse2binary(String text, boolean separator) {
+    public Mono<TranslateResponse> morse2binary(String text, boolean separator) {
         return decode2Morse(text)
-                .flatMap(input -> encode2Binary(input, separator));
+                .flatMap(response -> encode2Binary(response.getResponse(), separator));
     }
 
-    public Mono<String> binary2morse(String text) {
-        return decode2Binary(text)
+    public Mono<TranslateResponse> binary2morse(String text) {
+        return just(text)
+                .map(BinaryConverter::decode)
                 .flatMap(this::encode2Morse);
     }
 }

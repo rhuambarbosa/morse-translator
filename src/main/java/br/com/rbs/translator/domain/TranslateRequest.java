@@ -1,4 +1,4 @@
-package br.com.rbs.translator.controller;
+package br.com.rbs.translator.domain;
 
 import lombok.Data;
 
