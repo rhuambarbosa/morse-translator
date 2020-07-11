@@ -26,4 +26,11 @@ class BinaryConverterTest extends Specification {
             '01001000 01001111 01001100 01000001 00100000 01001101 01000101 01001100 01001001' | 'HOLA MELI'
     }
 
+    def "should error when try decode not binary"() {
+        when:
+            BinaryConverter.decode("HOLA MELI")
+        then:
+            thrown(NumberFormatException)
+    }
+
 }
