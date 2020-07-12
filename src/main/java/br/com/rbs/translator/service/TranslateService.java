@@ -14,6 +14,12 @@ import static reactor.core.publisher.Mono.just;
 @Service
 public class TranslateService {
 
+    private final MorseProcessor morseProcessor;
+
+    public TranslateService(MorseProcessor morseProcessor) {
+        this.morseProcessor = morseProcessor;
+    }
+
     public Mono<TranslateResponse> encode2Morse(String text) {
         return just(text)
                 .map(MorseConverter::encode)
@@ -21,7 +27,7 @@ public class TranslateService {
     }
 
     public Mono<TranslateResponse> decode2Morse(String text) {
-        return just(text)
+        return morseProcessor.process(text)
                 .map(MorseConverter::decode)
                 .map(TranslateResponse::new);
     }

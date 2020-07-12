@@ -10,6 +10,16 @@ MORSE -> BINARY |
 BINARY -> TEXT |
 BIMARY -> MORSE
 
+## Configuração
+Quando inserido um código morse a velociadade poder ser variável de acordo com o operador.  
+
+Se entende aqui que uma pausa prolongada ou a inclusão de um “full stop” (.-.-.-) indica o fim da mensagem.
+
+pausa prolongada = 10 espaços "                 "
+
+full stop = ".-.-.-"
+
+
 ## Deploy
 Deploy [heroku](https://www.heroku.com)
 

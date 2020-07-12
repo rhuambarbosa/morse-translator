@@ -1,8 +1,10 @@
 package br.com.rbs.translator.service
 
-
+import reactor.core.publisher.Mono
 import reactor.test.StepVerifier
 import spock.lang.Specification
+
+import static reactor.core.publisher.Mono.just
 
 class TranslateServiceTest extends Specification {
 
@@ -12,9 +14,11 @@ class TranslateServiceTest extends Specification {
     private static final String BINARY_SEPARATOR = '01001000 01001111 01001100 01000001 00100000 01001101 01000101 01001100 01001001'
 
     TranslateService service
+    MorseProcessor morseProcessorMock = Mock(MorseProcessor)
 
     def setup() {
-        service = new TranslateService()
+        service = new TranslateService(morseProcessorMock)
+        morseProcessorMock.process(_) >> just(MORSE)
     }
 
     def "should encode text2Morse"() {
