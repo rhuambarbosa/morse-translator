@@ -3,15 +3,12 @@ package br.com.rbs.translator.controller;
 import br.com.rbs.translator.domain.TranslateRequest;
 import br.com.rbs.translator.domain.TranslateResponse;
 import br.com.rbs.translator.service.TranslateService;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.server.ResponseStatusException;
 import reactor.core.publisher.Mono;
 
 @RestController
@@ -59,12 +56,5 @@ public class TranslateController {
     public Mono<ResponseEntity<TranslateResponse>> binary2text(@RequestBody TranslateRequest request) {
         return translateService.decode2Binary(request.getText())
                 .map(response -> new ResponseEntity<>(response, response.getStatus()));
-    }
-
-    @GetMapping("/health")
-    public ResponseEntity<String> healthCheck() {
-        throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Cause description here");
-        //   return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body("{\"status\" : \"UP\"}");
-        //return new ResponseEntity<>("{\"status\" : \"UP\"}", HttpStatus.OK);
     }
 }
