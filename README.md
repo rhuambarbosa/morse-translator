@@ -65,7 +65,7 @@ TEXT -> BINARY
 ```json
 request:
 
-curl --location --request POST 'localhost:8080/translate/2binary?separator=true' \
+curl --location --request POST 'https://translate-morse.herokuapp.com/translate/2binary?separator=true' \
 --header 'Content-Type: application/json' \
 --data-raw '{
 	"text":"HOLA MELI"	
@@ -83,7 +83,7 @@ TEXT -> MORSE
 ```json
 request:
 
-curl --location --request POST 'localhost:8080/translate/2morse' \
+curl --location --request POST 'https://translate-morse.herokuapp.com/translate/2morse' \
 --header 'Content-Type: application/json' \
 --data-raw '{
 	"text":"HOLA MELI"	
@@ -101,7 +101,7 @@ MORSE -> TEXT
 ```json
 request:
 
-curl --location --request POST 'localhost:8080/translate/2text' \
+curl --location --request POST 'https://translate-morse.herokuapp.com/translate/2text' \
 --header 'Content-Type: application/json' \
 --data-raw '{
 	"text":".... --- .-.. .-  -- . .-.. .."	
@@ -119,7 +119,7 @@ MORSE -> BINARY
 ```json
 request:
 
-curl --location --request POST 'localhost:8080/translate/morse2binary' \
+curl --location --request POST 'https://translate-morse.herokuapp.com/translate/morse2binary' \
 --header 'Content-Type: application/json' \
 --data-raw '{
 	"text":".... --- .-.. .-  -- . .-.. .."	
@@ -137,7 +137,7 @@ BINARY -> MORSE
 ```json
 request:
 
-curl --location --request POST 'localhost:8080/translate/binary2morse' \
+curl --location --request POST 'https://translate-morse.herokuapp.com/translate/binary2morse' \
 --header 'Content-Type: application/json' \
 --data-raw '{
 	"text":"010010000100111101001100010000010010000001001101010001010100110001001001"	
@@ -155,7 +155,7 @@ BINARY -> TEXT
 ```json
 request:
 
-curl --location --request POST 'localhost:8080/translate/binary2text' \
+curl --location --request POST 'https://translate-morse.herokuapp.com/translate/binary2text' \
 --header 'Content-Type: application/json' \
 --data-raw '{
 	"text":"01001000 01001111 01001100 01000001 00100000 01001101 01000101 01001100 01001001"	
